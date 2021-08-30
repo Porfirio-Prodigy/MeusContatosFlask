@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lista de Contatos</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!--BOOTSTRAP-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+        <!--FONT AWESOME-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+            
+    </head>
+    <body>
+        
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark text-center">
+            <div class="row">
+                <div class="col-3">
+                    <!-- Brand/logo -->
+                    <a class="navbar-brand" href="#">
+                        <img src="https://image.flaticon.com/icons/png/512/5220/5220088.png" alt="logo" width=60 height=40>
+                    </a>
+                </div>
+                <div class="col-9 text-success mt-2">
+                    <h3>Contatos</h3>
+                </div>
+            </div>      
+        </nav>
+
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12 col-md-6 col-sm-6 mt-5">
+                    <form action="/add" method="POST">
+                        <div class="form-group">
+                          <label for="nome">Nome:</label>
+                          <input type="text" class="form-control" placeholder="Nome:" name="nome" id="nome">
+                        </div>
+
+                        <div class="form-group">
+                          <label for="telefone">Telefone:</label>
+                          <input type="number" class="form-control" placeholder="Telefone" name="telefone" id="telefone">
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Enviar</button>
+                      </form>
+                </div>
+
+                <div class="col-12 col-md-6 col-sm-6 mt-3">
+                    <h1>Meus contatos</h1>
+                    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                              <th>Nome</th>
+                              <th>Telefone</th>
+                              <th>Opções</th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                            {%for dados in lista %}
+                                    <tr>
+                                        <td>{{ dados[1] }}</td>
+                                        <td>
+                                            {{ dados[2] }}
+                                        </td>
+                                        <td>
+                                        <form action="/remove" method="POST">
+                                            <button class="btn btn-danger" type="submit" name="id" value="{{dados[0]}}">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                        </td>
+                                    </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                      
+                </div>
+            </div>
+        </div>
+     </body>
+</html>
